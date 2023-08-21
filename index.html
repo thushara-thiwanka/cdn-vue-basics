@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+        margin: 20px;
+      }
+
+      .favorite {
+        color: violet;
+        background-color: aqua;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1 v-show="show">Currently showing books</h1>
+      <div v-if="show">
+        <p>{{title}}</p>
+      </div>
+      <p>{{number}}</p>
+      <button v-on:click="number++">+</button>
+      <button v-on:click="number--">-</button>
+      <button @click="reset">0</button>
+      <button @click="toggleShow">
+        <span v-if="!show">show</span>
+        <span v-else>hide</span>
+      </button>
+      <div style="display: flex; flex-wrap: wrap">
+        <div class="box" @mouseover="handleEvent($event, 5)">MouseOver</div>
+        <div class="box" @mouseleave="handleEvent">MouseLeave</div>
+        <div class="box" @dblclick="handleEvent">DoubleClick</div>
+        <div class="box" @mousemove="handleEvent">
+          MouseMove
+          <p>{{x}}, {{y}}</p>
+        </div>
+      </div>
+      <h1>Filtered books</h1>
+      <div v-for="book in filteredBooks" :class="{favorite: book.isFavorite}" @click="swapFavorites(book)">
+        <img :src="book.src" :alt="book.title">
+        <p>{{book.title}} - {{book.author}}</p>
+      </div>
+      <h1>All books</h1>
+      <div v-for="book in books" :class="{favorite: book.isFavorite}" @click="swapFavorites(book)">
+        <img :src="book.src" :alt="book.title">
+        <p>{{book.title}} - {{book.author}}</p>
+      </div>
+      <a v-bind:href="url_test">Go to test</a>
+      <br>
+      <a :href="url">Go to</a>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+
+</html>
